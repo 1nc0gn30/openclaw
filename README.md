@@ -1,3 +1,126 @@
+# openclaw
+
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
+
+## Overview
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
+
+## Tech Stack
+- Express
+- Docker
+
+## Project Structure
+```
+openclaw/
+  - Swabble
+  - apps
+  - assets
+  - docs
+  - extensions
+  - git-hooks
+  - packages
+  - patches
+  - scripts
+  - skills
+  (2549 files total)
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+
+### Installation
+```bash
+git clone https://github.com/1nc0gn30/openclaw.git
+cd openclaw
+npm install
+```
+
+### Development
+```bash
+npm run dev
+```
+
+### Build
+```bash
+npm run build
+```
+
+### Available Scripts
+  npm run android:assemble - cd apps/android && ./gradlew :app:assembleDebug
+  npm run android:install - cd apps/android && ./gradlew :app:installDebug
+  npm run android:run - cd apps/android && ./gradlew :app:installDebug && adb shell am start -n ai.openclaw.android/.MainActivity
+  npm run android:test - cd apps/android && ./gradlew :app:testDebugUnitTest
+  npm run build - pnpm canvas:a2ui:bundle && tsc -p tsconfig.json --noEmit false && node --import tsx scripts/canvas-a2ui-copy.ts && node --import tsx scripts/copy-hook-metadata.ts && node --import tsx scripts/write-build-info.ts
+  npm run canvas:a2ui:bundle - bash scripts/bundle-a2ui.sh
+  npm run check:loc - node --import tsx scripts/check-ts-max-loc.ts --max 500
+  npm run dev - node scripts/run-node.mjs
+  npm run docs:bin - node scripts/build-docs-list.mjs
+  npm run docs:build - cd docs && pnpm dlx --reporter append-only mint broken-links
+  npm run docs:dev - cd docs && mint dev
+  npm run docs:list - node scripts/docs-list.js
+  npm run format - oxfmt --check
+  npm run format:all - pnpm format && pnpm format:swift
+  npm run format:fix - oxfmt --write
+  npm run format:swift - swiftformat --lint --config .swiftformat apps/macos/Sources apps/ios/Sources apps/shared/OpenClawKit/Sources
+  npm run gateway:dev - OPENCLAW_SKIP_CHANNELS=1 CLAWDBOT_SKIP_CHANNELS=1 node scripts/run-node.mjs --dev gateway
+  npm run gateway:dev:reset - OPENCLAW_SKIP_CHANNELS=1 CLAWDBOT_SKIP_CHANNELS=1 node scripts/run-node.mjs --dev gateway --reset
+  npm run gateway:watch - node scripts/watch-node.mjs gateway --force
+  npm run ios:build - bash -lc 'cd apps/ios && xcodegen generate && xcodebuild -project OpenClaw.xcodeproj -scheme OpenClaw -destination "${IOS_DEST:-platform=iOS Simulator,name=iPhone 17}" -configuration Debug build'
+  npm run ios:gen - cd apps/ios && xcodegen generate
+  npm run ios:open - cd apps/ios && xcodegen generate && open OpenClaw.xcodeproj
+  npm run ios:run - bash -lc 'cd apps/ios && xcodegen generate && xcodebuild -project OpenClaw.xcodeproj -scheme OpenClaw -destination "${IOS_DEST:-platform=iOS Simulator,name=iPhone 17}" -configuration Debug build && xcrun simctl boot "${IOS_SIM:-iPhone 17}" || true && xcrun simctl launch booted ai.openclaw.ios'
+  npm run lint - oxlint --type-aware
+  npm run lint:all - pnpm lint && pnpm lint:swift
+  npm run lint:fix - pnpm format:fix && oxlint --type-aware --fix
+  npm run lint:swift - swiftlint lint --config .swiftlint.yml && (cd apps/ios && swiftlint lint --config .swiftlint.yml)
+  npm run mac:open - open dist/OpenClaw.app
+  npm run mac:package - bash scripts/package-mac-app.sh
+  npm run mac:restart - bash scripts/restart-mac.sh
+  npm run moltbot:rpc - node scripts/run-node.mjs agent --mode rpc --json
+  npm run openclaw - node scripts/run-node.mjs
+  npm run openclaw:rpc - node scripts/run-node.mjs agent --mode rpc --json
+  npm run plugins:sync - node --import tsx scripts/sync-plugin-versions.ts
+  npm run postinstall - node scripts/postinstall.js
+  npm run prepack - pnpm build && pnpm ui:build
+  npm run protocol:check - pnpm protocol:gen && pnpm protocol:gen:swift && git diff --exit-code -- dist/protocol.schema.json apps/macos/Sources/OpenClawProtocol/GatewayModels.swift
+  npm run protocol:gen - node --import tsx scripts/protocol-gen.ts
+  npm run protocol:gen:swift - node --import tsx scripts/protocol-gen-swift.ts
+  npm run release:check - node --import tsx scripts/release-check.ts
+  npm run start - node scripts/run-node.mjs
+  npm run test - node scripts/test-parallel.mjs
+  npm run test:all - pnpm lint && pnpm build && pnpm test && pnpm test:e2e && pnpm test:live && pnpm test:docker:all
+  npm run test:coverage - vitest run --coverage
+  npm run test:docker:all - pnpm test:docker:live-models && pnpm test:docker:live-gateway && pnpm test:docker:onboard && pnpm test:docker:gateway-network && pnpm test:docker:qr && pnpm test:docker:doctor-switch && pnpm test:docker:plugins && pnpm test:docker:cleanup
+  npm run test:docker:cleanup - bash scripts/test-cleanup-docker.sh
+  npm run test:docker:doctor-switch - bash scripts/e2e/doctor-install-switch-docker.sh
+  npm run test:docker:gateway-network - bash scripts/e2e/gateway-network-docker.sh
+  npm run test:docker:live-gateway - bash scripts/test-live-gateway-models-docker.sh
+  npm run test:docker:live-models - bash scripts/test-live-models-docker.sh
+  npm run test:docker:onboard - bash scripts/e2e/onboard-docker.sh
+  npm run test:docker:plugins - bash scripts/e2e/plugins-docker.sh
+  npm run test:docker:qr - bash scripts/e2e/qr-import-docker.sh
+  npm run test:e2e - vitest run --config vitest.e2e.config.ts
+  npm run test:force - node --import tsx scripts/test-force.ts
+  npm run test:install:e2e - bash scripts/test-install-sh-e2e-docker.sh
+  npm run test:install:e2e:anthropic - OPENCLAW_E2E_MODELS=anthropic CLAWDBOT_E2E_MODELS=anthropic bash scripts/test-install-sh-e2e-docker.sh
+  npm run test:install:e2e:openai - OPENCLAW_E2E_MODELS=openai CLAWDBOT_E2E_MODELS=openai bash scripts/test-install-sh-e2e-docker.sh
+  npm run test:install:smoke - bash scripts/test-install-sh-docker.sh
+  npm run test:live - OPENCLAW_LIVE_TEST=1 CLAWDBOT_LIVE_TEST=1 vitest run --config vitest.live.config.ts
+  npm run test:ui - pnpm --dir ui test
+  npm run test:watch - vitest
+  npm run tui - node scripts/run-node.mjs tui
+  npm run tui:dev - OPENCLAW_PROFILE=dev CLAWDBOT_PROFILE=dev node scripts/run-node.mjs --dev tui
+  npm run ui:build - node scripts/ui.js build
+  npm run ui:dev - node scripts/ui.js dev
+  npm run ui:install - node scripts/ui.js install
+
+## Original README
+<details>
+<summary>Click to expand original README</summary>
+
 # 🦞 OpenClaw — Personal AI Assistant
 
 <p align="center">
@@ -528,3 +651,25 @@ Thanks to all clawtributors:
   <a href="https://github.com/Alphonse-arianee"><img src="https://avatars.githubusercontent.com/u/254457365?v=4&s=48" width="48" height="48" alt="Alphonse-arianee" title="Alphonse-arianee"/></a> <a href="https://github.com/atalovesyou"><img src="https://avatars.githubusercontent.com/u/3534502?v=4&s=48" width="48" height="48" alt="atalovesyou" title="atalovesyou"/></a> <a href="https://github.com/search?q=Azade"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Azade" title="Azade"/></a> <a href="https://github.com/carlulsoe"><img src="https://avatars.githubusercontent.com/u/34673973?v=4&s=48" width="48" height="48" alt="carlulsoe" title="carlulsoe"/></a> <a href="https://github.com/search?q=ddyo"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="ddyo" title="ddyo"/></a> <a href="https://github.com/search?q=Erik"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Erik" title="Erik"/></a> <a href="https://github.com/latitudeki5223"><img src="https://avatars.githubusercontent.com/u/119656367?v=4&s=48" width="48" height="48" alt="latitudeki5223" title="latitudeki5223"/></a> <a href="https://github.com/search?q=Manuel%20Maly"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Manuel Maly" title="Manuel Maly"/></a> <a href="https://github.com/search?q=Mourad%20Boustani"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Mourad Boustani" title="Mourad Boustani"/></a> <a href="https://github.com/odrobnik"><img src="https://avatars.githubusercontent.com/u/333270?v=4&s=48" width="48" height="48" alt="odrobnik" title="odrobnik"/></a>
   <a href="https://github.com/pcty-nextgen-ios-builder"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="pcty-nextgen-ios-builder" title="pcty-nextgen-ios-builder"/></a> <a href="https://github.com/search?q=Quentin"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Quentin" title="Quentin"/></a> <a href="https://github.com/search?q=Randy%20Torres"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="Randy Torres" title="Randy Torres"/></a> <a href="https://github.com/rhjoh"><img src="https://avatars.githubusercontent.com/u/105699450?v=4&s=48" width="48" height="48" alt="rhjoh" title="rhjoh"/></a> <a href="https://github.com/ronak-guliani"><img src="https://avatars.githubusercontent.com/u/23518228?v=4&s=48" width="48" height="48" alt="ronak-guliani" title="ronak-guliani"/></a> <a href="https://github.com/search?q=William%20Stock"><img src="assets/avatar-placeholder.svg" width="48" height="48" alt="William Stock" title="William Stock"/></a>
 </p>
+
+</details>
+
+## TODO / Roadmap
+- [ ] Add CI/CD pipeline
+- [ ] Add contribution guidelines (CONTRIBUTING.md)
+- [ ] Improve error handling and edge cases
+- [ ] Add environment variable documentation
+- [ ] Update dependencies to latest versions
+- [ ] Add code comments and inline documentation
+
+## Deployment
+This project can be deployed to Netlify, Vercel, or any static host.
+
+## Author
+**Neal Frazier** - [@AshAmplifies](https://github.com/1nc0gn30)
+
+## Links
+- GitHub: https://github.com/1nc0gn30/openclaw
+
+---
+*This README was enhanced as part of the neals-projects-2026 batch update.*
