@@ -1,15 +1,27 @@
-# openclaw
+<!-- xonettn -->
+<div align="center">
 
+# 📦 Openclaw
+
+Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
+
+
+![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+
+![Deploy](https://img.shields.io/badge/Deployed-Netlify-00C7B7?logo=netlify&logoColor=white)
+
+</div>
+
+---
+
+## 📋 Overview
 Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
 
-## Overview
-Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 
-
-## Tech Stack
+## 📦 Tech Stack
 - Express
 - Docker
 
-## Project Structure
+## 🗂️ Project Structure
 ```
 openclaw/
   - Swabble
@@ -25,30 +37,30 @@ openclaw/
   (2549 files total)
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 - Node.js (v18+)
 - npm or yarn
 
-### Installation
+### 📦 Installation
 ```bash
 git clone https://github.com/1nc0gn30/openclaw.git
 cd openclaw
 npm install
 ```
 
-### Development
+### 💻 Development
 ```bash
 npm run dev
 ```
 
-### Build
+### 🔨 Build
 ```bash
 npm run build
 ```
 
-### Available Scripts
+### ⚙️ Available Scripts
   npm run android:assemble - cd apps/android && ./gradlew :app:assembleDebug
   npm run android:install - cd apps/android && ./gradlew :app:installDebug
   npm run android:run - cd apps/android && ./gradlew :app:installDebug && adb shell am start -n ai.openclaw.android/.MainActivity
@@ -117,7 +129,7 @@ npm run build
   npm run ui:dev - node scripts/ui.js dev
   npm run ui:install - node scripts/ui.js install
 
-## Original README
+## 📂 Original README
 <details>
 <summary>Click to expand original README</summary>
 
@@ -164,7 +176,7 @@ Model note: while any model is supported, I strongly recommend **Anthropic Pro/M
 - Models config + CLI: [Models](https://docs.openclaw.ai/concepts/models)
 - Auth profile rotation (OAuth vs API keys) + fallbacks: [Model failover](https://docs.openclaw.ai/concepts/model-failover)
 
-## Install (recommended)
+## 📦 Install (recommended)
 
 Runtime: **Node ≥22**.
 
@@ -197,7 +209,7 @@ openclaw agent --message "Ship checklist" --thinking high
 
 Upgrading? [Updating guide](https://docs.openclaw.ai/install/updating) (and run `openclaw doctor`).
 
-## Development channels
+## 💻 Development channels
 
 - **stable**: tagged releases (`vYYYY.M.D` or `vYYYY.M.D-<patch>`), npm dist-tag `latest`.
 - **beta**: prerelease tags (`vYYYY.M.D-beta.N`), npm dist-tag `beta` (macOS app may be missing).
@@ -206,7 +218,7 @@ Upgrading? [Updating guide](https://docs.openclaw.ai/install/updating) (and run 
 Switch channels (git + npm): `openclaw update --channel stable|beta|dev`.
 Details: [Development channels](https://docs.openclaw.ai/install/development-channels).
 
-## From source (development)
+## 💻 From source (development)
 
 Prefer `pnpm` for builds from source. Bun is optional for running TypeScript directly.
 
@@ -226,7 +238,7 @@ pnpm gateway:watch
 
 Note: `pnpm openclaw ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `openclaw` binary.
 
-## Security defaults (DM access)
+## 🔒 Security defaults (DM access)
 
 OpenClaw connects to real messaging surfaces. Treat inbound DMs as **untrusted input**.
 
@@ -285,7 +297,7 @@ Run `openclaw doctor` to surface risky/misconfigured DM policies.
 - [Cron + wakeups](https://docs.openclaw.ai/automation/cron-jobs); [webhooks](https://docs.openclaw.ai/automation/webhook); [Gmail Pub/Sub](https://docs.openclaw.ai/automation/gmail-pubsub).
 - [Skills platform](https://docs.openclaw.ai/tools/skills): bundled, managed, and workspace skills with install gating + UI.
 
-### Runtime + safety
+### 🚀 Runtime + safety
 
 - [Channel routing](https://docs.openclaw.ai/concepts/channel-routing), [retry policy](https://docs.openclaw.ai/concepts/retry), and [streaming/chunking](https://docs.openclaw.ai/concepts/streaming).
 - [Presence](https://docs.openclaw.ai/concepts/presence), [typing indicators](https://docs.openclaw.ai/concepts/typing-indicators), and [usage tracking](https://docs.openclaw.ai/concepts/usage-tracking).
@@ -432,7 +444,7 @@ Runbook: [iOS connect](https://docs.openclaw.ai/platforms/ios).
 - Injected prompt files: `AGENTS.md`, `SOUL.md`, `TOOLS.md`.
 - Skills: `~/.openclaw/workspace/skills/<skill>/SKILL.md`.
 
-## Configuration
+## ⚙️ Configuration
 
 Minimal `~/.openclaw/openclaw.json` (model + defaults):
 
@@ -446,7 +458,7 @@ Minimal `~/.openclaw/openclaw.json` (model + defaults):
 
 [Full configuration reference (all keys + examples).](https://docs.openclaw.ai/gateway/configuration)
 
-## Security model (important)
+## 🔒 Security model (important)
 
 - **Default:** tools run on the host for the **main** session, so the agent has full access when it’s just you.
 - **Group/channel safety:** set `agents.defaults.sandbox.mode: "non-main"` to run **non‑main sessions** (groups/channels) inside per‑session Docker sandboxes; bash then runs in Docker for those sessions.
@@ -550,7 +562,7 @@ Use these when you’re past the onboarding flow and want the deeper reference.
 - [Control UI](https://docs.openclaw.ai/web/control-ui)
 - [Dashboard](https://docs.openclaw.ai/web/dashboard)
 
-## Operations & troubleshooting
+## 🔧 Operations & troubleshooting
 
 - [Health checks](https://docs.openclaw.ai/gateway/health)
 - [Gateway lock](https://docs.openclaw.ai/gateway/gateway-lock)
@@ -654,7 +666,7 @@ Thanks to all clawtributors:
 
 </details>
 
-## TODO / Roadmap
+## 📝 TODO / Roadmap
 - [ ] Add CI/CD pipeline
 - [ ] Add contribution guidelines (CONTRIBUTING.md)
 - [ ] Improve error handling and edge cases
@@ -662,14 +674,22 @@ Thanks to all clawtributors:
 - [ ] Update dependencies to latest versions
 - [ ] Add code comments and inline documentation
 
-## Deployment
+## 🚀 Deployment
 This project can be deployed to Netlify, Vercel, or any static host.
 
-## Author
+## 👤 Author
 **Neal Frazier** - [@AshAmplifies](https://github.com/1nc0gn30)
 
-## Links
+## 🔗 Links
 - GitHub: https://github.com/1nc0gn30/openclaw
 
 ---
 *This README was enhanced as part of the neals-projects-2026 batch update.*
+
+---
+
+<div align="center">
+
+**[xonettn]** · Built by [Neal Frazier](https://github.com/1nc0gn30) · [@AshAmplifies](https://twitter.com/AshAmplifies)
+
+</div>
